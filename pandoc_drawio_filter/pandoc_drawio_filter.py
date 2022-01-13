@@ -2,7 +2,7 @@
 
 """
 Pandoc filter to process *.drawio images to PDFs.
-Needs xvfb and drawio.
+Needs drawio.
 """
 
 import os
@@ -27,14 +27,7 @@ def drawio(key, value, format_, _):
         if src_extension == ".drawio":
             pdf_name = f"{src_basename}.pdf"
             if modification_time(pdf_name) < modification_time(src):
-                """
-                Drawio needs to run in a virtual X session, because Electron
-                refuses to work and dies with an unhelpful error message
-                otherwise:
-                The futex facility returned an unexpected error code.
-                """
                 cmd_line = [
-                    "xvfb-run",
                     "drawio",
                     "--crop",
                     "-f",
@@ -45,14 +38,7 @@ def drawio(key, value, format_, _):
                     pdf_name,
                 ]
                 print("Running {}".format(" ".join(cmd_line)), file=sys.stderr)
-                """
-                Electron really wants a configuration directory to not die with:
-                Error: Failed to get 'appData' path
-                """
-                my_env = os.environ.copy()
-                my_env["XDG_CONFIG_HOME"] = tempfile.gettempdir()
-
-                subprocess.call(cmd_line, stdout=sys.stderr.fileno(), env=my_env)
+                subprocess.call(cmd_line, stdout=sys.stderr.fileno())
 
             return Image(attrs, alt, [pdf_name, title])
 

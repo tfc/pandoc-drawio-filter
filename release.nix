@@ -3,6 +3,6 @@ let
   pkgs = import sources.nixpkgs { };
 in
 rec {
-  pandoc-drawio-filter = pkgs.callPackage ./. { doCheck = true; };
+  pandoc-drawio-filter = pkgs.python3Packages.callPackage ./. { doCheck = true; };
   example = pkgs.callPackage ./example { inherit pandoc-drawio-filter; };
 }

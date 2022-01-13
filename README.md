@@ -9,9 +9,9 @@ files to PDF before embedding them when referenced as images in markdown.
 Make sure that you have the following command line tools in your `PATH`
 environment:
 
-- `xvfb`
 - [`drawio`](https://github.com/jgraph/drawio-desktop)
 - (plus the usual tools that you use with `pandoc`, like TeX etc.)
+- `xvfb` if you intend to run this in some container that has no X service
 
 Write markdown documents as usual, with drawio images like this:
 
