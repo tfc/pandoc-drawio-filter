@@ -11,8 +11,6 @@
 }:
 
 let
-  tag = "1.0";
-
   wrappedDrawio = writeScriptBin "drawio" ''
     #!${runtimeShell}
 
@@ -35,8 +33,8 @@ let
 in
 
 buildPythonApplication {
-  name = "pandoc-drawio-filter";
-  version = tag;
+  pname = "pandoc-drawio-filter";
+  version = "1.1";
 
   src = ./.;
 
