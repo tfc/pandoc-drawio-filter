@@ -1,7 +1,6 @@
-{ buildPythonApplication
+{ python3Packages
 , fetchFromGitHub
 , drawio
-, pandocfilters
 , xvfb-run
 , runtimeShell
 , writeScriptBin
@@ -32,7 +31,7 @@ let
   '';
 in
 
-buildPythonApplication {
+python3Packages.buildPythonApplication {
   pname = "pandoc-drawio-filter";
   version = "1.1";
 
@@ -40,7 +39,7 @@ buildPythonApplication {
 
   propagatedBuildInputs = [
     wrappedDrawio
-    pandocfilters
+    python3Packages.pandocfilters
   ];
 
   # Activate this in a local CI that pins black. Every version difference of
